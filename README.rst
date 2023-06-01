@@ -3,7 +3,7 @@ HTTomolib is a library of methods for tomography
 
 **HTTomolib** is a collection of image processing methods in Python for computed tomography.
 
-**HTTomolib** can be used as a stand-alone library, however it has been specifically developed to 
+**HTTomolib** can be used as a stand-alone library, however, it has been specifically developed to 
 work together with the `HTTomo <https://diamondlightsource.github.io/httomo/>`_ package.
 HTTomo is a user interface (UI) written in Python for fast big data processing using MPI protocols. 
 
@@ -28,5 +28,5 @@ Build HTTomolib as a conda Python package
 =============================================
 
 .. code-block:: console
-   $ export VERSION=1.0
+
    $ conda build conda/recipe/ -c conda-forge -c httomo
