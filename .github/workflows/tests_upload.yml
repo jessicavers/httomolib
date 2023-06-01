@@ -30,12 +30,20 @@ jobs:
       - name: Install dependencies with conda
         run: |      
           $CONDA/bin/conda env create --name httomolib --file conda/environment.yml
-          $CONDA/bin/conda activate httomolib
           $CONDA/bin/conda run -n httomolib pip install -e .
           $CONDA/bin/conda list
 
       # run tests
       - name: Run CPU tests
         run: |     
-          $CONDA/bin/conda activate httomolib
           $CONDA/bin/conda run -n httomolib pytest
+
+      - name: Decrypt a secret
+        run: ./.scripts/decrypt_secret.sh
+        env:
+          LARGE_SECRET_PASSPHRASE: ${{ secrets.LARGE_SECRET_PASSPHRASE }}
+
+      - name: Build and upload the tested package to httomo conda cloud
+        run: |
+          chmod +x ./.scripts/conda_upload.sh
+          ./.scripts/conda_upload.sh
