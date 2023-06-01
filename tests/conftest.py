@@ -61,22 +61,17 @@ def host_darks(
 ):
     return np.copy(data_file["darks"])
 
-
 @pytest.fixture
 def host_angles(data_file):
     return np.copy(data_file["angles"])
-
 
 @pytest.fixture
 def host_angles_total(data_file):
     return np.copy(data_file["angles_total"])
 
-
 @pytest.fixture
 def host_detector_y(data_file):
     return np.copy(data_file["detector_y"])
-
-
 
 @pytest.fixture
 def host_detector_x(data_file):

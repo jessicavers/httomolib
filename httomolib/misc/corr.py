@@ -23,13 +23,10 @@
 from typing import Tuple
 import numpy as np
 
-from httomolib.decorator import method_all
-
 __all__ = [
     "inpainting_filter3d",
 ]
 
-@method_all(cpuonly=True)
 def inpainting_filter3d(
     data: np.ndarray,
     mask: np.ndarray,

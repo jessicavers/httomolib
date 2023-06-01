@@ -6,7 +6,6 @@ import scipy
 from httomolib.misc.corr import (
     inpainting_filter3d,
 )
-from httomolib import method_registry
 from numpy.testing import assert_allclose, assert_equal
 
 eps = 1e-6
