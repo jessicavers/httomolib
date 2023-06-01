@@ -45,6 +45,7 @@ dev = [
   "pydocstyle",
   "toml",
   "imageio",
+  "setuptools-git-versioning",
 ]
 
 [project.urls]

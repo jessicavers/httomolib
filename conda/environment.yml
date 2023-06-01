@@ -15,5 +15,6 @@ dependencies:
   - conda-forge::pydocstyle
   - conda-forge::imageio
   - conda-forge::toml
+  - conda-forge::setuptools-git-versioning
   - anaconda::ipython
   - httomo::larix
