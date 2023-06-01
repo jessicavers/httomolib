@@ -16,7 +16,10 @@ export CONDA_BLD_PATH=~/conda-bld
 #    done
 # done
 
-conda build . -c conda-forge -c httomo
+$CONDA/bin/conda install conda-build
+$CONDA/bin/conda install -c anaconda anaconda-client
+
+$CONDA/bin/conda build . -c conda-forge -c httomo
 
 # upload packages to conda
 find $CONDA_BLD_PATH/$OS -name *.tar.bz2 | while read file
