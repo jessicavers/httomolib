@@ -1,0 +1,54 @@
+{% set pyproject = load_file_data("../../pyproject.toml", from_recipe_dir=True) %}
+{% set proj = pyproject.get("project") %}
+{% set name = proj.get("name") %}
+{% set version = proj.get("version") %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  path: ../../
+
+build:
+  preserve_egg_dir: False
+  number: 0
+
+requirements:
+  host:
+    - python
+    - pip
+    - setuptools
+  run:
+    - python
+    - numpy
+    - larix
+    - setuptools
+    - scipy
+    - pillow
+    - scikit-image
+    - pytest
+
+test:
+  requires:
+    - pip
+    - pytest
+  imports:
+    - httomolib
+    - httomolib.misc
+  source_files:
+    - tests/*
+  commands:
+    - pip check
+    - pytest
+
+about:
+  home: https://github.com/DiamondLightSource/httomolib
+  summary: 'A library of data processing and reconstruction methods for tomography'
+  description: |
+    A library of data processing and reconstruction methods for tomography
+
+extra:
+  recipe-maintainers:
+    - namannimmo10
+    - dkazanc
