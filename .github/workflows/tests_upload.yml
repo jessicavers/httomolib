@@ -28,15 +28,13 @@ jobs:
 
       # install dependencies with conda
       - name: Install dependencies with conda
-        run: |
-          conda env create --name httomolib --file conda/environment.yml
-          conda activate httomolib
-          conda run -n httomolib pip install -e .
-          conda env list
-          conda list
+        run: |      
+          $CONDA/bin/conda env update --file conda/environment.yml --name base
+          pip install -e .          
+          $CONDA/bin/conda list
 
       # run tests
-      - name: Run CPU tests (No CUDA drivers needed)
+      - name: Run CPU tests
         run: |
-          conda run -n httomolib pip install pytest plumbum
-          conda run -n httomolib pytest -m
+          $CONDA/bin/conda install pytest plumbum
+          pytest -m
