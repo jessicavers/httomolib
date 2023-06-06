@@ -9,6 +9,8 @@ packages = ["httomolib",
 
 [tool.setuptools-git-versioning]
 enabled = true
+template = "{tag}"
+dev_template = "{tag}"
 
 [project]
 name = "httomolib"
