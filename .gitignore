@@ -158,3 +158,9 @@ cython_debug/
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
+
+# These are files that are created during the conda build process that need to
+# be ignored in order to avoid builds being marked as being in a "dirty" state
+build_env_setup.sh
+conda_build.sh
+metadata_conda_debug.yaml

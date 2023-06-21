@@ -1,10 +1,9 @@
-name: httomolib tests and conda upload
+name: httomolib nightly conda package build
 
-# Run the workflow whenever a tag beginning with `v` is pushed to any branch
 on:
-  push:
-    tags:
-      - v*
+  schedule:
+    # Run at midnight every day
+    - cron: '0 0 * * *'
 
 jobs:
   build-linux:
@@ -18,26 +17,14 @@ jobs:
       - name: Checkout repository code
         uses: actions/checkout@v3
         with:
+          ref: "main"
           fetch-depth: 0
-          ref: ${{ github.ref_name }}
 
       # setup Python 3.9
       - name: Setup Python 3.9
         uses: actions/setup-python@v2
         with:
           python-version: 3.9
-
-      # install dependencies with conda
-      - name: Install dependencies with conda
-        run: |      
-          $CONDA/bin/conda env create --name httomolib --file conda/environment.yml
-          $CONDA/bin/conda run -n httomolib pip install -e .
-          $CONDA/bin/conda list
-
-      # run tests
-      - name: Run CPU tests
-        run: |     
-          $CONDA/bin/conda run -n httomolib pytest
 
       - name: Decrypt a secret
         run: ./.scripts/decrypt_secret.sh
@@ -46,7 +33,7 @@ jobs:
 
       - name: Build and upload the tested package to httomo conda cloud
         env:
-          LABEL: main
+          LABEL: dev
         run: |
           chmod +x ./.scripts/conda_upload.sh
           ./.scripts/conda_upload.sh
