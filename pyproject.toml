@@ -5,7 +5,8 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools]
 include-package-data = true
 packages = ["httomolib",
-            "httomolib.misc"]
+            "httomolib.misc",
+            "httomolib.prep"]
 
 [tool.setuptools-git-versioning]
 enabled = true
