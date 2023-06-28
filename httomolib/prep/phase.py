@@ -69,9 +69,6 @@ def paganin_filter(
     """
 
     # Check the input data is valid
-    if tomo.ndim == 2:
-        tomo = np.expand_dims(tomo, 0)
-
     if tomo.ndim != 3:
         raise ValueError(
             f"Invalid number of dimensions in data: {tomo.ndim},"
