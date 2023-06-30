@@ -80,7 +80,7 @@ def paganin_filter(
     # Perform padding to the power of 2 as FFT is O(n*log(n)) complexity
     # NOTE: Need to convert to float32 as FFT produces complex128 array from uint16
     # TODO: adding other options of padding?    
-    padded_tomo, pad_tup = _padding_power_of2(np.float32(tomo))
+    padded_tomo, pad_tup = _pad_projections_to_second_power(np.float32(tomo))
     
     dz, dy, dx = np.shape(padded_tomo)
     
@@ -113,37 +113,42 @@ def paganin_filter(
 def _shift_bit_length(x):
     return 1<<(x-1).bit_length()
 
-def _padding_power_of2(tomo) -> np.ndarray:
-    """Performs padding of each projection to the next power of 2.
+def _pad_projections_to_second_power(tomo: np.ndarray) -> tuple[np.ndarray, tuple]:
+    """
+    Performs padding of each projection to the next power of 2.
     If the shape is not even we also care of that before padding.
 
-    Args:
-        tomo (ndarray): 3d projection data
+    Parameters
+    ----------
+    tomo : cp.ndarray
+        3d projection data
 
-    Returns:
-        ndarray: padded 3d projection data
-        tuple: a tuple with padding dimensions
+    Returns
+    -------
+    ndarray: padded 3d projection data
+    tuple: a tuple with padding dimensions
     """
     full_shape_tomo = np.shape(tomo)
-        
-    pad_tup = np.zeros(np.array((3,2)), dtype=int)
+
+    pad_tup = []
     for index, element in enumerate(full_shape_tomo):
         if index == 0:
-            pad_width = (0,0) # do not pad the slicing dim
+            pad_width = (0, 0)  # do not pad the slicing dim
         else:
             diff = _shift_bit_length(element + 1) - element
             if element % 2 == 0:
                 pad_width = diff // 2
-                pad_width = (pad_width,pad_width)
+                pad_width = (pad_width, pad_width)
             else:
                 # need an uneven padding for odd-number lengths
                 left_pad = diff // 2
                 right_pad = diff - left_pad
                 pad_width = (left_pad, right_pad)
-        pad_tup[index] = pad_width    
-    
-    padded_tomo= np.pad(tomo, tuple(pad_tup), 'edge')
-        
+
+        pad_tup.append(pad_width)
+
+    padded_tomo = np.pad(tomo, tuple(pad_tup), "edge")
+
     return padded_tomo, pad_tup
 
 
