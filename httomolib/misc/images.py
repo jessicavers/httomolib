@@ -36,7 +36,7 @@ def save_to_images(
     data: ndarray,
     out_dir: str,
     subfolder_name: str = "images",
-    axis: int = 0,
+    axis: int = 1,
     file_format: str = "tif",
     bits: int = 8,
     perc_range_min: float = 0.0,
