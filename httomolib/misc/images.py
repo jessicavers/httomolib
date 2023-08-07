@@ -97,7 +97,7 @@ def save_to_images(
 
     data = np.nan_to_num(data, copy=False, nan=0.0, posinf=0, neginf=0)
     
-    if glob_stats is None:
+    if glob_stats is None or glob_stats is False:
         min_percentile = np.nanpercentile(data, perc_range_min)
         max_percentile = np.nanpercentile(data, perc_range_max)
     else:
@@ -105,7 +105,7 @@ def save_to_images(
         range_intensity = glob_stats[1] - glob_stats[0]
         min_percentile = (perc_range_min * (range_intensity) / 100) + glob_stats[0]
         max_percentile = (perc_range_max * (range_intensity) / 100) + glob_stats[0]
-    
+
     if data.ndim == 3:
         slice_dim_size = np.shape(data)[axis]
         for idx in range(slice_dim_size):
