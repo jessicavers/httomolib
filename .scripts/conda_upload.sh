@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKG_NAME=httomolib
-USER=DLS
+USER=httomo-team
 OS=linux-64
 CONDA_TOKEN=$(cat $HOME/.secrets/my_secret.json)
 
