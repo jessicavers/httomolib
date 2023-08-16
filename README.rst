@@ -12,7 +12,7 @@ Install HTTomolib as a pre-built conda Python package
 =========================================================
 .. code-block:: console
 
-   $ conda env create --name httomolib # create a fresh conda environment
+   $ conda create --name httomolib # create a fresh conda environment
    $ conda install -c httomo httomolib
 
 Setup the development environment:
